@@ -3,6 +3,7 @@
 
 #if !os(Windows)
 
+import Darwin
 import Geometry
 import POSIXCore
 import Synchronization
@@ -281,7 +282,7 @@ internal final actor POSIXTerminal: VTTerminal {
 #if GNU
     _ = Glibc.write(self.hOut, string, string.utf8.count)
 #else
-    _ = unistd.write(self.hOut, string, string.utf8.count)
+    _ = _DarwinFoundation3.write(self.hOut, string, string.utf8.count)
 #endif
   }
 }

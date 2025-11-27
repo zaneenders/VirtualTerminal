@@ -7,20 +7,9 @@ import WindowsCore
 #if GNU
 import libunistring
 #endif
+import Darwin
 import POSIXCore
 import Synchronization
-
-private enum Locale {
-  private static let utf8: Mutex<locale_t?> = Mutex(nil)
-
-  static var ID_UTF8: locale_t? {
-    return utf8.withLock { locale in
-      if let locale { return locale }
-      locale = newlocale(LC_CTYPE_MASK, "en_US.UTF-8", nil)
-      return locale
-    }
-  }
-}
 
 #endif
 
@@ -92,7 +81,7 @@ extension UnicodeScalar {
     // Zero-width character (combining marks, etc.) -> 0
     // Normal width character                       -> 1
     // Wide character (CJK, etc.)                   -> 2
-    return max(1, Int(wcwidth_l(wchar_t(value), Locale.ID_UTF8)))
+    return max(1, Int(wcwidth(wchar_t(value))))
 #endif
   }
 }
