@@ -9,7 +9,6 @@ import libunistring
 #endif
 import POSIXCore
 import Synchronization
-import locale
 
 private enum Locale {
   private static let utf8: Mutex<locale_t?> = Mutex(nil)

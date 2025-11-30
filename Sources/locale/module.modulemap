@@ -1,4 +1,0 @@
-module locale {
-  header "locale.h"
-  export *
-}
