@@ -281,7 +281,7 @@ internal final actor POSIXTerminal: VTTerminal {
 #if GNU
     _ = Glibc.write(self.hOut, string, string.utf8.count)
 #else
-    _ = unistd.write(self.hOut, string, string.utf8.count)
+    _ = Darwin.write(self.hOut, string, string.utf8.count)
 #endif
   }
 }
